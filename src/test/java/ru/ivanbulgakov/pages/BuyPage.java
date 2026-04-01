@@ -2,22 +2,26 @@ package ru.ivanbulgakov.pages;
 
 import com.codeborne.selenide.SelenideElement;
 
-import java.time.Duration;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class BuyPage {
 
-    private final SelenideElement priceValue = $(".styles-module-scss-module__t92_WG__price").$("h2");
+    private final SelenideElement priceValue = $(".styles-module-scss-module__t92_WG__price").$("h2"),
+            currencyList = $(".ant-select-selector");
 
-    public CoursePage checkPrice(String expectedPrice) {
-        // Добавляем 15 секунд ожидания
-        priceValue.shouldBe(visible, Duration.ofSeconds(15))
-                .shouldHave(text(expectedPrice));
-        switchTo().window(2);
-
-        return new CoursePage();
+    public BuyPage checkPrice(String expectedPrice) {
+        priceValue.shouldBe(visible)
+                  .shouldHave(text(expectedPrice));
+        return this;
     }
+
+    public BuyPage selectCurrency(String currency) {
+        currencyList.click();
+        $ (byText(currency)).click();
+        return this;
+    }
+
 }

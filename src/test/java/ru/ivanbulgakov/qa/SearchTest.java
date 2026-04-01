@@ -4,6 +4,9 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import ru.ivanbulgakov.pages.BuyPage;
+import ru.ivanbulgakov.pages.WelcomePage;
+import ru.ivanbulgakov.pages.WelcomeStepik;
 import ru.ivanbulgakov.pages.YandexSearchPage;
 
 import static com.codeborne.selenide.Selectors.byAttribute;
@@ -15,40 +18,58 @@ public class SearchTest {
     @Tag("POSITIVE")
 
     void mentoringPriceShouldBe47000Test() {
-        Configuration.holdBrowserOpen = true;
-        open("https://yandex.by/", YandexSearchPage.class)
 
+        Configuration.holdBrowserOpen = true;
+        Configuration.timeout = 15000;
+
+        open("https://yandex.by/", YandexSearchPage.class)
                 .closeDefaultBrowserSelectWindow()
                 .search("ivanbulgakov.qa")
                 .submit()
+
                 .openLink("ivanbulgakovqa.ru")
+                .switchToPage(1, WelcomePage.class)
+
                 .clickPrice()
                 .clickGoTo()
                 .clickBuy()
-                .checkPrice("₽ 47 000.00");
 
-        /*
-        создаем класс под страницу ->
-        выписываем методы для взаимодействия ->
-        вытаскиваем из теста действия ->
-        выносим локаторы в переменные
-         */
+                .switchToPage(2, BuyPage.class)
 
-    }
+                .selectCurrency("EUR")
+                .checkPrice("€ 502.90");
+
+       }
+
+    /*
+            создаем класс под страницу ->
+            выписываем методы для взаимодействия ->
+            вытаскиваем из теста действия ->
+            выносим локаторы в переменные
+             */
+
 
     @Test
     void myFirstTest() {
 
         Configuration.holdBrowserOpen = true;
+        Configuration.timeout = 15000;
+
         open("https://yandex.by/", YandexSearchPage.class)
 
                 .closeDefaultBrowserSelectWindow()
                 .search("stepik.org")
                 .submit()
+
                 .openLink("stepik.org")
+                .switchToPage(1, WelcomeStepik.class)
+
                 .searchAuthorCourse("Artsiom Rusau")
                 .clickAuthor()
-                .openCourseByIndex(9)
+                //.openCourseByName("Тестирование ПО с нуля. Теория + Практика. Базовый уровень")
+                .openCourseByIndex(10)
+
+                .switchToCourse(2)
                 .checkPriceCourse("Бесплатно")
                 .checkLevel("Начальный уровень");
     }
