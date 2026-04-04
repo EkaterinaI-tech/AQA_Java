@@ -9,14 +9,13 @@ import ru.ivanbulgakov.pages.WelcomePage;
 import ru.ivanbulgakov.pages.WelcomeStepik;
 import ru.ivanbulgakov.pages.YandexSearchPage;
 
-import static com.codeborne.selenide.Selectors.byAttribute;
 import static com.codeborne.selenide.Selenide.*;
 
 public class SearchTest {
+
     @Test
     @DisplayName("Проверить, что цена обучения - 47000 рублей")
     @Tag("POSITIVE")
-
     void mentoringPriceShouldBe47000Test() {
 
         Configuration.holdBrowserOpen = true;
@@ -41,19 +40,11 @@ public class SearchTest {
 
        }
 
-    /*
-            создаем класс под страницу ->
-            выписываем методы для взаимодействия ->
-            вытаскиваем из теста действия ->
-            выносим локаторы в переменные
-             */
-
-
     @Test
     void myFirstTest() {
 
-        Configuration.holdBrowserOpen = true;
-        Configuration.timeout = 15000;
+        Configuration.timeout = 25000;
+        Configuration.browserSize = "1920x1080";
 
         open("https://yandex.by/", YandexSearchPage.class)
 
@@ -65,12 +56,13 @@ public class SearchTest {
                 .switchToPage(1, WelcomeStepik.class)
 
                 .searchAuthorCourse("Artsiom Rusau")
+
                 .clickAuthor()
-                //.openCourseByName("Тестирование ПО с нуля. Теория + Практика. Базовый уровень")
-                .openCourseByIndex(10)
+                .openCourseByName("Тестирование ПО с нуля. Теория + Практика")
 
                 .switchToCourse(2)
                 .checkPriceCourse("Бесплатно")
+                .scrollToLevel()
                 .checkLevel("Начальный уровень");
     }
 }
