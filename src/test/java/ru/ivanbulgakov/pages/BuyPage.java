@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class BuyPage {
 
-    private final SelenideElement priceValue = $(".styles-module-scss-module__t92_WG__price").$("h2"),
+    private final SelenideElement priceValue = $("[class*='t92_WG__price'] h3"),
             currencyList = $(".ant-select-selector");
 
     public BuyPage checkPrice(String expectedPrice) {
