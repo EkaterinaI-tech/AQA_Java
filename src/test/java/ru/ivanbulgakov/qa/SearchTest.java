@@ -26,7 +26,7 @@ public class SearchTest {
 
         open(YANDEX_URL, YandexSearchPage.class)
                 .closeDefaultBrowserSelectWindow()
-                .search("ivanbulgakov.qa")
+                .search("ivanbulgakovqa")
                 .submit()
 
                 .openLink("ivanbulgakovqa.ru")
@@ -38,9 +38,8 @@ public class SearchTest {
 
                 .switchToPage(2, BuyPage.class)
 
-                .selectCurrency("EUR")
-                .checkPrice("€ 502.90");
-
+                .selectCurrency("RUB")
+                .checkPrice("47 000");
        }
 
 
