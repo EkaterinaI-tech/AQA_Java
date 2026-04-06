@@ -13,16 +13,18 @@ import static com.codeborne.selenide.Selectors.byAttribute;
 import static com.codeborne.selenide.Selenide.*;
 
 public class SearchTest {
+    private static final String YANDEX_URL = "https://yandex.by/";
+
     @Test
     @DisplayName("Проверить, что цена обучения - 47000 рублей")
     @Tag("POSITIVE")
 
     void mentoringPriceShouldBe47000Test() {
 
-        Configuration.holdBrowserOpen = true;
-        Configuration.timeout = 15000;
+        Configuration.timeout = 25000;
+        Configuration.browserSize = "1920x1080";
 
-        open("https://yandex.by/", YandexSearchPage.class)
+        open(YANDEX_URL, YandexSearchPage.class)
                 .closeDefaultBrowserSelectWindow()
                 .search("ivanbulgakov.qa")
                 .submit()
@@ -48,14 +50,14 @@ public class SearchTest {
             выносим локаторы в переменные
              */
 
-
+    private static final String COURSE_NAME = "Тестирование ПО с нуля. Теория + Практика. Базовый уровень";
     @Test
     void myFirstTest() {
 
-        Configuration.holdBrowserOpen = true;
-        Configuration.timeout = 15000;
+        Configuration.timeout = 25000;
+        Configuration.browserSize = "1920x1080";
 
-        open("https://yandex.by/", YandexSearchPage.class)
+        open(YANDEX_URL, YandexSearchPage.class)
 
                 .closeDefaultBrowserSelectWindow()
                 .search("stepik.org")
@@ -66,11 +68,11 @@ public class SearchTest {
 
                 .searchAuthorCourse("Artsiom Rusau")
                 .clickAuthor()
-                //.openCourseByName("Тестирование ПО с нуля. Теория + Практика. Базовый уровень")
-                .openCourseByIndex(10)
+                .openCourseByName(COURSE_NAME)
 
                 .switchToCourse(2)
                 .checkPriceCourse("Бесплатно")
+                .scrollToLevel()
                 .checkLevel("Начальный уровень");
     }
 }
