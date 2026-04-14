@@ -10,7 +10,6 @@ import ru.ivanbulgakov.pages.BuyPage;
 import ru.ivanbulgakov.pages.WelcomePage;
 import ru.ivanbulgakov.pages.WelcomeStepik;
 import ru.ivanbulgakov.pages.YandexSearchPage;
-
 import static com.codeborne.selenide.Selectors.byAttribute;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -49,12 +48,6 @@ public class SearchTest {
                 .checkPrice("47 000");
        }
 
-    /*
-            создаем класс под страницу ->
-            выписываем методы для взаимодействия ->
-            вытаскиваем из теста действия ->
-            выносим локаторы в переменные
-             */
 
     private static final String COURSE_NAME = "Тестирование ПО с нуля. Теория + Практика. Базовый уровень";
     @Test
