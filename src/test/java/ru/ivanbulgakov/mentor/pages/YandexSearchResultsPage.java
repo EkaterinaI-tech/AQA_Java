@@ -1,8 +1,4 @@
-package ru.ivanbulgakov.pages;
-
-import com.codeborne.selenide.SelenideElement;
-
-import java.lang.reflect.InvocationTargetException;
+package ru.ivanbulgakov.mentor.pages;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;

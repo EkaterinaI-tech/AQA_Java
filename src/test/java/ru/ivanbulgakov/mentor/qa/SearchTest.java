@@ -1,4 +1,4 @@
-package ru.ivanbulgakov.qa;
+package ru.ivanbulgakov.mentor.qa;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
@@ -6,10 +6,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import ru.ivanbulgakov.pages.BuyPage;
-import ru.ivanbulgakov.pages.WelcomePage;
-import ru.ivanbulgakov.pages.WelcomeStepik;
-import ru.ivanbulgakov.pages.YandexSearchPage;
+import ru.ivanbulgakov.mentor.pages.BuyPage;
+import ru.ivanbulgakov.mentor.pages.WelcomePage;
+import ru.ivanbulgakov.mentor.pages.WelcomeStepik;
+import ru.ivanbulgakov.mentor.pages.YandexSearchPage;
 import static com.codeborne.selenide.Selectors.byAttribute;
 import static com.codeborne.selenide.Selenide.*;
 

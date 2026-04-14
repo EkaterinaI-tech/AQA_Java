@@ -1,4 +1,4 @@
-package ru.ivanbulgakov.pages;
+package ru.ivanbulgakov.mentor.pages;
 
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.Selenide.switchTo;
