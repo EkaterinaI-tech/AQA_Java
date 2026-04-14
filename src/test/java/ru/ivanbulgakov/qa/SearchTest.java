@@ -1,6 +1,8 @@
 package ru.ivanbulgakov.qa;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,11 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class SearchTest {
     private static final String YANDEX_URL = "https://yandex.by/";
+
+    @AfterEach
+    void tearDown() {
+        Selenide.closeWebDriver();
+    }
 
     @Test
     @DisplayName("Проверить, что цена обучения - 47000 рублей")
