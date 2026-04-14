@@ -1,6 +1,8 @@
 package ru.ivanbulgakov.qa;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -8,12 +10,16 @@ import ru.ivanbulgakov.pages.BuyPage;
 import ru.ivanbulgakov.pages.WelcomePage;
 import ru.ivanbulgakov.pages.WelcomeStepik;
 import ru.ivanbulgakov.pages.YandexSearchPage;
-
 import static com.codeborne.selenide.Selectors.byAttribute;
 import static com.codeborne.selenide.Selenide.*;
 
 public class SearchTest {
     private static final String YANDEX_URL = "https://yandex.by/";
+
+    @AfterEach
+    void tearDown() {
+        Selenide.closeWebDriver();
+    }
 
     @Test
     @DisplayName("Проверить, что цена обучения - 47000 рублей")
@@ -26,7 +32,7 @@ public class SearchTest {
 
         open(YANDEX_URL, YandexSearchPage.class)
                 .closeDefaultBrowserSelectWindow()
-                .search("ivanbulgakov.qa")
+                .search("ivanbulgakovqa")
                 .submit()
 
                 .openLink("ivanbulgakovqa.ru")
@@ -38,11 +44,9 @@ public class SearchTest {
 
                 .switchToPage(2, BuyPage.class)
 
-                .selectCurrency("EUR")
-                .checkPrice("€ 502.90");
-
+                .selectCurrency("RUB")
+                .checkPrice("47 000");
        }
-
 
 
     private static final String COURSE_NAME = "Тестирование ПО с нуля. Теория + Практика. Базовый уровень";
