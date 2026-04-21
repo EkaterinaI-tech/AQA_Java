@@ -1,14 +1,12 @@
-package ru.ivanbulgakov.demowebshop;
+package ru.ivanbulgakov.demowebshop.test;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import net.datafaker.Faker;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import ru.ivanbulgakov.demowebshop.pages.WsWelcomePage;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
+import static ru.ivanbulgakov.demowebshop.config.Config.WEBSHOP_URL;
 
 public class RegistrationTest {
     private static final Faker faker = new Faker();
@@ -21,7 +19,7 @@ public class RegistrationTest {
         String password = faker.harryPotter().character() + faker.number().positive();
         String email = faker.internet().emailAddress();
 
-        open("https://demowebshop.tricentis.com/", WsWelcomePage.class)
+        open(WEBSHOP_URL, WsWelcomePage.class)
                 .openRegistration()
                 .verifyRegistrationOpened()
                 .selectFemaleGender()

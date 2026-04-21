@@ -20,6 +20,18 @@ public class WsRegistrationPage {
     private final SelenideElement resultText = $("div.result");
     private final ElementsCollection headerLinks = $$("div.header-links ul li a");
 
+    public WsRegistrationPage register(String firstName, String lastName, String email, String password) {
+        selectFemaleGender()
+                .enterFirstName(firstName)
+                .enterLastName(lastName)
+                .enterEmail(email)
+                .enterPassword(password)
+                .enterConfirmPassword(password)
+                .submitRegistration()
+                .checkRegistrationCompleted();
+        return this;
+    }
+
     public WsRegistrationPage verifyRegistrationOpened() {
         pageTitle.shouldHave(text("Register"));
         return this;
