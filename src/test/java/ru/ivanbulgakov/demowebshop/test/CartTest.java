@@ -3,10 +3,12 @@ package ru.ivanbulgakov.demowebshop.test;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.ivanbulgakov.demowebshop.pages.WsCartPage;
+import ru.ivanbulgakov.demowebshop.pages.WsProductPage;
+import ru.ivanbulgakov.demowebshop.pages.WsWelcomePage;
 import ru.ivanbulgakov.demowebshop.steps.AuthSteps;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.ivanbulgakov.demowebshop.config.Config.WEBSHOP_URL;
@@ -25,27 +27,32 @@ public class CartTest {
 
     @Test
     void addItemToCartTest() {
-        open(WEBSHOP_URL);
-        $$("ul.top-menu li a").get(1).hover();
-        $(byText("Desktops")).click();
-        $$("div.product-grid div").get(0).click();
+        WsProductPage productPage = open(WEBSHOP_URL, WsWelcomePage.class)
+                .hoverCategory(1)
+                .clickSubCategory("Desktops")
+                .openProductByIndex(0);
 
-        String itemName = $("[itemprop=name]").getText();
-        String itemPrice = $("[itemprop=price]").getText();
+        String itemName = productPage.getItemName();
+        String itemPrice = productPage.getItemPrice();
         String itemQuantity = "2";
 
-        $$("dl dd ul li").get(0).$$("input").get(0).click();
-        $("input.qty-input").setValue(itemQuantity);
-        $("input.add-to-cart-button").click();
-        $(".bar-notification.success").shouldBe(visible);
-        $("span.cart-qty").shouldHave(text("(" + itemQuantity + ")"));
-        $("span.cart-label").click();
+        productPage.selectFirstOption()
 
-        $("a.product-name").shouldHave(text(itemName));
-        String actualQuantity  = $(".qty-input").val();
+                .setQuantity(itemQuantity)
+                .addToCart()
+                .verifySuccessNotificationVisible()
+                .verifyCartQuantity(itemQuantity)
+                .goToCart()
+
+                .verifyProductName(itemName)
+                .verifyProductPrice(itemPrice);
+
+        WsCartPage cartPage = productPage.goToCart();
+        String actualQuantity = cartPage.getActualQuantity();
         assertEquals(itemQuantity, actualQuantity);
-        $("span.product-subtotal").shouldHave(text(String.valueOf(
-                Float.parseFloat(itemPrice) * Float.parseFloat(itemQuantity))));
+
+        cartPage.verifySubtotal(String.valueOf(
+                Float.parseFloat(itemPrice) * Float.parseFloat(itemQuantity)));
 
     }
 }
