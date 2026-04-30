@@ -8,8 +8,8 @@ import ru.ivanbulgakov.demowebshop.pages.WsProductPage;
 import ru.ivanbulgakov.demowebshop.pages.WsWelcomePage;
 import ru.ivanbulgakov.demowebshop.steps.AuthSteps;
 
-import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.ivanbulgakov.demowebshop.config.Config.WEBSHOP_URL;
 
@@ -35,24 +35,34 @@ public class CartTest {
         String itemName = productPage.getItemName();
         String itemPrice = productPage.getItemPrice();
         String itemQuantity = "2";
-
-        productPage.selectFirstOption()
-
+        int processorIndex = 1;
+        WsCartPage cartPage = productPage.selectProcessor(processorIndex)
                 .setQuantity(itemQuantity)
                 .addToCart()
                 .verifySuccessNotificationVisible()
                 .verifyCartQuantity(itemQuantity)
-                .goToCart()
+                .goToCart();
 
-                .verifyProductName(itemName)
-                .verifyProductPrice(itemPrice);
+        float basePrice = Float.parseFloat(itemPrice);
+        float surcharge = getProcessorSurcharge(processorIndex);
+        String expectedTotal = String.format(java.util.Locale.US, "%.2f",
+                (basePrice + surcharge) * Float.parseFloat(itemQuantity));
 
-        WsCartPage cartPage = productPage.goToCart();
-        String actualQuantity = cartPage.getActualQuantity();
-        assertEquals(itemQuantity, actualQuantity);
+        assertAll(
+                () -> assertEquals(itemName, cartPage.getItemName()),
+                () -> assertEquals(String.format(java.util.Locale.US, "%.2f", basePrice + surcharge), cartPage.getProductPrice(), "Цена за штуку не совпала"),
+                () -> assertEquals(expectedTotal, cartPage.getSubtotal()),
+                () -> assertEquals(itemQuantity, cartPage.getQuantity())
+        );
+    }
 
-        cartPage.verifySubtotal(String.valueOf(
-                Float.parseFloat(itemPrice) * Float.parseFloat(itemQuantity)));
-
+    private float getProcessorSurcharge(int processorIndex) {
+        return switch (processorIndex) {
+            case 0 -> 0f;      // slow - без надбавки
+            case 1 -> 15f;     // medium - +15$
+            case 2 -> 100f;    // fast - +100$
+            default -> throw new IllegalArgumentException(
+                    "Unknown processor index: " + processorIndex);
+        };
     }
 }

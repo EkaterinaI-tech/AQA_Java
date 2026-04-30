@@ -19,15 +19,17 @@ public class WsProductPage {
     private final SelenideElement cartLink = $("span.cart-label");
 
     public String getItemName() {
+
         return productNameLabel.getText();
     }
 
     public String getItemPrice() {
+
         return productPriceLabel.getText();
     }
 
-    public WsProductPage selectFirstOption() {
-        processorOptions.get(0).$$("input").get(0).click();
+    public WsProductPage selectProcessor(int index) {
+        processorOptions.get(index).$("input").click();
         return this;
     }
 

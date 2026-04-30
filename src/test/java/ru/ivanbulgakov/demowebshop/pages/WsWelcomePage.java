@@ -26,13 +26,12 @@ public class WsWelcomePage {
         return new WsLoginPage();
     }
 
-    public WsWelcomePage checkUserLoggedIn(String email) {
-        headerLinks.get(0).shouldHave(text(email));
-        return this;
+    public String getLoggedInUserEmail() {
+        return headerLinks.get(0).text();
     }
 
     public WsWelcomePage hoverCategory(int index) {
-        topMenuLinks.get(1).hover();
+        topMenuLinks.get(index).hover();
         return this;
     }
 
@@ -42,7 +41,7 @@ public class WsWelcomePage {
     }
 
     public WsProductPage openProductByIndex(int index) {
-        productItems.get(0).click();
+        productItems.get(index).click();
         return new WsProductPage();
     }
 

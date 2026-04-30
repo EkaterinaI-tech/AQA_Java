@@ -2,7 +2,6 @@ package ru.ivanbulgakov.demowebshop.pages;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 
 public class WsCartPage {
@@ -11,30 +10,19 @@ public class WsCartPage {
     private final SelenideElement qtyInput = $("input.qty-input");
     private final SelenideElement subtotalLabel = $("span.product-subtotal");
 
-    public WsCartPage verifyProductName(String expectedName) {
-        productName.shouldHave(text(expectedName));
-        return this;
+    public String getItemName() {
+        return productName.text();
     }
 
-    public WsCartPage verifyProductPrice(String expectedPrice) {
-        productPrice.shouldHave(text(expectedPrice));
-        return this;
+    public String getProductPrice() {
+        return productPrice.text();
     }
 
-    public String getActualQuantity() {
+    public String getQuantity() {
         return qtyInput.val();
     }
 
-    public void verifySubtotal(String expectedSubtotal) {
-        subtotalLabel.shouldHave(text(expectedSubtotal));
+    public String getSubtotal() {
+        return subtotalLabel.text();
     }
 }
-
-/*
-$("a.product-name").shouldHave(text(itemName));
-        $("span.product-unit-price").shouldHave(text(itemPrice));
-        String actualQuantity = $("input.qty-input").val();
-        assertEquals(itemQuantity, actualQuantity);
-        $("span.product-subtotal").shouldHave(text(String.valueOf(
-                Float.parseFloat(itemPrice) * Float.parseFloat(itemQuantity))));
- */

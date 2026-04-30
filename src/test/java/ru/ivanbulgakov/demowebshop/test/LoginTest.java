@@ -8,6 +8,7 @@ import ru.ivanbulgakov.demowebshop.pages.WsRegistrationPage;
 import ru.ivanbulgakov.demowebshop.pages.WsWelcomePage;
 
 import static com.codeborne.selenide.Selenide.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.ivanbulgakov.demowebshop.config.Config.WEBSHOP_URL_REGISTER_URL;
 import static ru.ivanbulgakov.demowebshop.config.Config.WEBSHOP_URL;
 
@@ -39,14 +40,13 @@ public class LoginTest {
     @Test
     void successLoginTest() {
 
-        open(WEBSHOP_URL, WsWelcomePage.class)
+        assertEquals(email, open(WEBSHOP_URL, WsWelcomePage.class)
                 .openLogIn()
-                .checkLoginPageOpened()
                 .enterEmail(email)
                 .enterPassword(password)
-                .checkRememberMe()
                 .submitLogin()
-                .checkUserLoggedIn(email);
+                .getLoggedInUserEmail()
+        );
     }
 }
 
