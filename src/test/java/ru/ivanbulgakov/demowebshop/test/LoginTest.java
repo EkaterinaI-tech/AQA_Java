@@ -40,14 +40,12 @@ public class LoginTest {
     @Test
     void successLoginTest() {
 
-        assertEquals(email, open(WEBSHOP_URL, WsWelcomePage.class)
-                .openLogIn()
+        String loggedInUserEmail = open(WEBSHOP_URL, WsWelcomePage.class)                .openLogIn()
                 .enterEmail(email)
                 .enterPassword(password)
                 .submitLogin()
-                .getLoggedInUserEmail()
-        );
+                .getLoggedInUserEmail();
+
+        assertEquals(email, loggedInUserEmail, "Емейл залогиненного пользователя не совпадает");
     }
 }
-
-
