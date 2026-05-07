@@ -1,11 +1,9 @@
 package ru.ivanbulgakov.mentor.qa;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import ru.ivanbulgakov.demowebshop.TestBase;
 import ru.ivanbulgakov.mentor.pages.BuyPage;
 import ru.ivanbulgakov.mentor.pages.WelcomePage;
 import ru.ivanbulgakov.mentor.pages.WelcomeStepik;
@@ -13,22 +11,15 @@ import ru.ivanbulgakov.mentor.pages.YandexSearchPage;
 import static com.codeborne.selenide.Selectors.byAttribute;
 import static com.codeborne.selenide.Selenide.*;
 
-public class SearchTest {
+public class SearchTest extends TestBase {
     private static final String YANDEX_URL = "https://yandex.by/";
 
-    @AfterEach
-    void tearDown() {
-        Selenide.closeWebDriver();
-    }
-
-    @Test
     @DisplayName("Проверить, что цена обучения - 47000 рублей")
     @Tag("POSITIVE")
+    @Tag("BULGAKOV")
+    @Test
 
     void mentoringPriceShouldBe47000Test() {
-
-        Configuration.timeout = 25000;
-        Configuration.browserSize = "1920x1080";
 
         open(YANDEX_URL, YandexSearchPage.class)
                 .closeDefaultBrowserSelectWindow()
@@ -50,11 +41,11 @@ public class SearchTest {
 
 
     private static final String COURSE_NAME = "Тестирование ПО с нуля. Теория + Практика. Базовый уровень";
+    @DisplayName("Проверить, что курс Тестирование ПО с нуля. Теория + Практика. Базовый уровень бесплатный")
+    @Tag("STEPIK")
+    @Tag("POSITIVE")
     @Test
-    void myFirstTest() {
-
-        Configuration.timeout = 25000;
-        Configuration.browserSize = "1920x1080";
+    void myStepikTest() {
 
         open(YANDEX_URL, YandexSearchPage.class)
 

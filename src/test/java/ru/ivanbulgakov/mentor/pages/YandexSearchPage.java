@@ -2,6 +2,9 @@ package ru.ivanbulgakov.mentor.pages;
 
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class YandexSearchPage {
@@ -13,8 +16,10 @@ public class YandexSearchPage {
 
 
      public YandexSearchPage closeDefaultBrowserSelectWindow() {
-        closeWindow.click();
-        return this;
+         if (closeWindow.is(visible, Duration.ofMillis(500))) {
+             closeWindow.click();
+         }
+         return this;
     }
 
     public YandexSearchPage search(String query) {

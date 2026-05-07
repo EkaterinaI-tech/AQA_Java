@@ -2,7 +2,10 @@ package ru.ivanbulgakov.demowebshop.test;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import ru.ivanbulgakov.demowebshop.TestBase;
 import ru.ivanbulgakov.demowebshop.pages.WsCartPage;
 import ru.ivanbulgakov.demowebshop.pages.WsProductPage;
 import ru.ivanbulgakov.demowebshop.pages.WsWelcomePage;
@@ -13,18 +16,18 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.ivanbulgakov.demowebshop.config.Config.WEBSHOP_URL;
 
-public class CartTest {
+public class CartTest extends TestBase {
     private final AuthSteps authSteps = new AuthSteps();
 
     @BeforeEach
     void beforeEach() {
-        Configuration.holdBrowserOpen = true;
-        Configuration.timeout = 25000;
-        Configuration.browserSize = "1920x1080";
-
         authSteps.registerNewUser();
     }
 
+    @DisplayName("Проверка добавления товара в корзину в соответствии с количеством и ценой")
+    @Tag("SMOKE")
+    @Tag("CART")
+    @Tag("POSITIVE")
     @Test
     void addItemToCartTest() {
         WsProductPage productPage = open(WEBSHOP_URL, WsWelcomePage.class)

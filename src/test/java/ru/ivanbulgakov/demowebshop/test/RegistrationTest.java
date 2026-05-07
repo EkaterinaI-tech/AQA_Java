@@ -2,20 +2,25 @@ package ru.ivanbulgakov.demowebshop.test;
 
 import com.codeborne.selenide.Configuration;
 import net.datafaker.Faker;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import ru.ivanbulgakov.demowebshop.TestBase;
 import ru.ivanbulgakov.demowebshop.pages.WsWelcomePage;
 
 import static com.codeborne.selenide.Selenide.*;
 import static ru.ivanbulgakov.demowebshop.config.Config.WEBSHOP_URL;
 
-public class RegistrationTest {
+public class RegistrationTest extends TestBase {
     private static final Faker faker = new Faker();
 
+    @Tag("REGISTRATION")
+    @Tag("POSITIVE")
+    @DisplayName("Успешная регистрация нового пользователя с использованием Faker")
     @Test
+
     void registrationTest() {
-        Configuration.holdBrowserOpen = true;
-        Configuration.timeout = 25000;
-        Configuration.browserSize = "1920x1080";
+
         String password = faker.harryPotter().character() + faker.number().positive();
         String email = faker.internet().emailAddress();
 

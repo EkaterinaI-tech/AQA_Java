@@ -2,8 +2,10 @@ package ru.ivanbulgakov.demowebshop.test;
 
 import com.codeborne.selenide.Configuration;
 import net.datafaker.Faker;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import ru.ivanbulgakov.demowebshop.TestBase;
 import ru.ivanbulgakov.demowebshop.pages.WsRegistrationPage;
 import ru.ivanbulgakov.demowebshop.pages.WsWelcomePage;
 
@@ -12,16 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.ivanbulgakov.demowebshop.config.Config.WEBSHOP_URL_REGISTER_URL;
 import static ru.ivanbulgakov.demowebshop.config.Config.WEBSHOP_URL;
 
-public class LoginTest {
+public class LoginTest extends TestBase {
     private static final Faker faker = new Faker();
     private String email;
     private String password;
 
     @BeforeEach
     void beforeEach() {
-        Configuration.holdBrowserOpen = true;
-        Configuration.timeout = 25000;
-        Configuration.browserSize = "1920x1080";
         password = faker.harryPotter().character() + faker.number().positive();
         email = faker.internet().emailAddress();
 
@@ -37,15 +36,34 @@ public class LoginTest {
         clearBrowserLocalStorage();
     }
 
+    @DisplayName("Проверка успешного входа залогиненного пользователя")
+    @Tag("SMOKE")
+    @Tag("LOGIN")
+    @Tag("POSITIVE")
     @Test
     void successLoginTest() {
 
-        String loggedInUserEmail = open(WEBSHOP_URL, WsWelcomePage.class)                .openLogIn()
+        String loggedInUserEmail = open(WEBSHOP_URL, WsWelcomePage.class)
+                .openLogIn()
                 .enterEmail(email)
                 .enterPassword(password)
                 .submitLogin()
                 .getLoggedInUserEmail();
 
         assertEquals(email, loggedInUserEmail, "Емейл залогиненного пользователя не совпадает");
+    }
+
+    @DisplayName("Проверка появления ошибки при вводе некорректного Email")
+    @Tag("LOGIN")
+    @Tag("NEGATIVE")
+    @ParameterizedTest
+    @CsvFileSource(resources = "/email.csv")
+    void invalidEmailLoginTest(String email) {
+        open(WEBSHOP_URL, WsWelcomePage.class)
+                .openLogIn()
+                .enterEmail(email)
+                .enterPassword(password)
+                .verifyEmailValidationErrorAppear()
+                .submitLogin();
     }
 }
