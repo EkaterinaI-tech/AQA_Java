@@ -1,6 +1,7 @@
 package ru.ivanbulgakov.demowebshop.test;
 
 import com.codeborne.selenide.Configuration;
+import io.qameta.allure.*;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -9,15 +10,23 @@ import ru.ivanbulgakov.demowebshop.TestBase;
 import ru.ivanbulgakov.demowebshop.pages.WsWelcomePage;
 
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static ru.ivanbulgakov.demowebshop.config.Config.WEBSHOP_URL;
 
 public class RegistrationTest extends TestBase {
     private static final Faker faker = new Faker();
 
+    @Test
+    @Owner("KateI")
+    @DisplayName("Успешная регистрация нового пользователя с использованием Faker")
     @Tag("REGISTRATION")
     @Tag("POSITIVE")
-    @DisplayName("Успешная регистрация нового пользователя с использованием Faker")
-    @Test
+    @Severity(CRITICAL)
+    @Epic("Авторизация")
+    @Feature("Регистрация")
+    @Description("Создаем нового пользователя через интерфейс с случайными данными")
+    @Story("Регистрация нового пользователя")
+    @Link("TASK-123")
 
     void registrationTest() {
 
@@ -33,6 +42,7 @@ public class RegistrationTest extends TestBase {
                 .enterEmail(email)
                 .enterPassword(password)
                 .enterConfirmPassword(password)
+                //.enterConfirmPassword("pass")
                 .submitRegistration()
                 .checkRegistrationCompleted()
                 .checkEmailIsShow(email);

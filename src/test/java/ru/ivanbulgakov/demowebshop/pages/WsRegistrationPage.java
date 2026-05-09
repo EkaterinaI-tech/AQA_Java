@@ -2,6 +2,7 @@ package ru.ivanbulgakov.demowebshop.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import net.datafaker.providers.base.ElectricalComponents;
 
 import static com.codeborne.selenide.Condition.text;
@@ -74,6 +75,7 @@ public class WsRegistrationPage {
 
     public WsRegistrationPage checkRegistrationCompleted() {
         resultText.shouldHave(text("Your registration completed"));
+        //resultText.shouldHave(text("adfg registration completed"));
         return this;
     }
 

@@ -1,5 +1,22 @@
 plugins {
     id 'java'
+    id 'io.qameta.allure' version '3.0.1'
+}
+
+def allureVersion = "2.24.0"
+
+allure {
+    report {
+        version.set(allureVersion)
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set(allureVersion)
+            }
+        }
+    }
 }
 
 repositories {
@@ -7,13 +24,77 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-params'
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    testImplementation("com.codeborne:selenide:7.15.0")
-    implementation("net.datafaker:datafaker:2.5.4")
+    testImplementation "io.qameta.allure:allure-junit5:$allureVersion"
+    testImplementation "io.qameta.allure:allure-selenide:$allureVersion"
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testImplementation 'com.codeborne:selenide:7.13.0'
+    testImplementation 'net.datafaker:datafaker:2.5.3'
 }
 
 test {
     useJUnitPlatform()
+}
+
+task smokeTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'SMOKE'
+        testClassesDirs = sourceSets.test.output.classesDirs
+        classpath = sourceSets.test.runtimeClasspath
+    }
+}
+
+task positiveTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'POSITIVE'
+        testClassesDirs = sourceSets.test.output.classesDirs
+        classpath = sourceSets.test.runtimeClasspath
+    }
+}
+
+task negativeTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'NEGATIVE'
+        testClassesDirs = sourceSets.test.output.classesDirs
+        classpath = sourceSets.test.runtimeClasspath
+    }
+}
+
+task loginTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'LOGIN'
+        testClassesDirs = sourceSets.test.output.classesDirs
+        classpath = sourceSets.test.runtimeClasspath
+    }
+}
+
+task cartTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'CART'
+        testClassesDirs = sourceSets.test.output.classesDirs
+        classpath = sourceSets.test.runtimeClasspath
+    }
+}
+
+task registrationTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'REGISTRATION'
+        testClassesDirs = sourceSets.test.output.classesDirs
+        classpath = sourceSets.test.runtimeClasspath
+    }
+}
+
+task stepicTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'STEPIK'
+        testClassesDirs = sourceSets.test.output.classesDirs
+        classpath = sourceSets.test.runtimeClasspath
+    }
+}
+
+task bulgakovTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'BULGAKOV'
+        testClassesDirs = sourceSets.test.output.classesDirs
+        classpath = sourceSets.test.runtimeClasspath
+    }
 }

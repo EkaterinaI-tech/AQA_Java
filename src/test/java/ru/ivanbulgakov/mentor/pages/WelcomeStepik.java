@@ -31,7 +31,7 @@ public class WelcomeStepik {
             title.scrollTo();
 
             if (title.getText().contains(courseName)) {
-                title.scrollIntoCenter().click();
+                title.click();
                 return new CoursePage();
             }
         }
