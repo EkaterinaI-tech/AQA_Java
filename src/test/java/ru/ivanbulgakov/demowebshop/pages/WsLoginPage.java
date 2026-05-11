@@ -14,6 +14,8 @@ public class WsLoginPage {
     private final SelenideElement inputRememberMe = $("input#RememberMe");
     private final SelenideElement loginButton =  $("input.login-button");
 
+
+    @Step("Проверить, что открылась страница для входа")
     public WsLoginPage checkLoginPageOpened() {
         pageTitleLogin.shouldHave(text("Welcome, Please Sign In!"));
         return this;

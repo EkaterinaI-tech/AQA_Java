@@ -7,6 +7,7 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import ru.ivanbulgakov.demowebshop.util.AttachManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class TestBase {
 
     @BeforeAll
     static void before() {
-        Configuration.headless = true;
+        //Configuration.headless = true;
         Configuration.timeout = 25000;
         Configuration.browserSize = "1920x1080";
     }
@@ -36,6 +37,10 @@ public class TestBase {
 
             closeExtraTabs();
         }
+
+        AttachManager.takeScreenshot();
+        AttachManager.pageSource();
+        AttachManager.browserConsoleLogs();
     }
 
     private void closeExtraTabs() {

@@ -1,6 +1,9 @@
 package ru.ivanbulgakov.demowebshop.test;
 
 import com.codeborne.selenide.Configuration;
+import io.qameta.allure.Link;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -12,6 +15,7 @@ import ru.ivanbulgakov.demowebshop.pages.WsWelcomePage;
 import ru.ivanbulgakov.demowebshop.steps.AuthSteps;
 
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.ivanbulgakov.demowebshop.config.Config.WEBSHOP_URL;
@@ -28,7 +32,11 @@ public class CartTest extends TestBase {
     @Tag("SMOKE")
     @Tag("CART")
     @Tag("POSITIVE")
+    @Severity(CRITICAL)
+    @Owner("EkaterinaI-tech")
+    @Link(name = "TASK-120", url = "https://jira.example.com/browse/TASK-120")
     @Test
+
     void addItemToCartTest() {
         WsProductPage productPage = open(WEBSHOP_URL, WsWelcomePage.class)
                 .hoverCategory(1)

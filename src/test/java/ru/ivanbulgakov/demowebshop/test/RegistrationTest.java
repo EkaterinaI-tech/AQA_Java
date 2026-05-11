@@ -16,8 +16,8 @@ import static ru.ivanbulgakov.demowebshop.config.Config.WEBSHOP_URL;
 public class RegistrationTest extends TestBase {
     private static final Faker faker = new Faker();
 
-    @Test
-    @Owner("KateI")
+
+    @Owner("EkaterinaI-tech")
     @DisplayName("Успешная регистрация нового пользователя с использованием Faker")
     @Tag("REGISTRATION")
     @Tag("POSITIVE")
@@ -26,7 +26,8 @@ public class RegistrationTest extends TestBase {
     @Feature("Регистрация")
     @Description("Создаем нового пользователя через интерфейс с случайными данными")
     @Story("Регистрация нового пользователя")
-    @Link("TASK-123")
+    @Link(name = "TASK-120", url = "https://jira.example.com/browse/TASK-120")
+    @Test
 
     void registrationTest() {
 

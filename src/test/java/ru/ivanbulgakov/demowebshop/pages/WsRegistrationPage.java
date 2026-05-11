@@ -17,7 +17,7 @@ public class WsRegistrationPage {
     private final SelenideElement emailInput = $("input#Email");
     private final SelenideElement passwordInput = $("input#Password");
     private final SelenideElement confirmPasswordInput = $("input#ConfirmPassword");
-    private final SelenideElement submitRegistrationButten = $("input#register-button");
+    private final SelenideElement submitRegistrationButton = $("input#register-button");
     private final SelenideElement resultText = $("div.result");
     private final ElementsCollection headerLinks = $$("div.header-links ul li a");
 
@@ -33,52 +33,63 @@ public class WsRegistrationPage {
         return this;
     }
 
+
+    @Step("Проверить, что страница регистрации открыта")
     public WsRegistrationPage verifyRegistrationOpened() {
         pageTitle.shouldHave(text("Register"));
         return this;
     }
 
+    @Step("Выбрать женский пол")
     public WsRegistrationPage selectFemaleGender() {
         femaleGenderRadio.click();
         return this;
     }
 
+    @Step("Ввести имя: {firstName}")
     public WsRegistrationPage enterFirstName(String firstName) {
         firstNameInput.setValue(firstName);
         return this;
     }
 
+    @Step("Ввести фамилию: {lastName}")
     public WsRegistrationPage enterLastName(String lastName) {
         lastNameInput.setValue(lastName);
         return this;
     }
 
+    @Step("Ввести email: {email}")
     public WsRegistrationPage enterEmail(String email) {
         emailInput.setValue(email);
         return this;
     }
 
+    @Step("Ввести пароль {password}")
     public WsRegistrationPage enterPassword(String password) {
         passwordInput.setValue(password);
         return this;
     }
 
+    @Step("Подтвердить пароль")
     public WsRegistrationPage enterConfirmPassword(String confirmPassword) {
         confirmPasswordInput.setValue(confirmPassword);
         return this;
     }
 
+    @Step("Нажать кнопку регистрации")
     public WsRegistrationPage submitRegistration() {
-        submitRegistrationButten.click();
+        submitRegistrationButton.click();
         return this;
     }
 
+    @Step("Проверить, что регистрация завершена успешно")
     public WsRegistrationPage checkRegistrationCompleted() {
         resultText.shouldHave(text("Your registration completed"));
         //resultText.shouldHave(text("adfg registration completed"));
         return this;
     }
 
+    @Step("Проверить, что в шапке отображается email: {email}")
     public WsRegistrationPage checkEmailIsShow(String email) {
         headerLinks.get(0).shouldHave(text(email));
         return this;

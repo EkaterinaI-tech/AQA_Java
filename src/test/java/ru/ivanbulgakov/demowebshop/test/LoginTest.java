@@ -1,6 +1,9 @@
 package ru.ivanbulgakov.demowebshop.test;
 
 import com.codeborne.selenide.Configuration;
+import io.qameta.allure.Link;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,6 +14,7 @@ import ru.ivanbulgakov.demowebshop.pages.WsRegistrationPage;
 import ru.ivanbulgakov.demowebshop.pages.WsWelcomePage;
 
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.ivanbulgakov.demowebshop.config.Config.*;
 
@@ -42,7 +46,11 @@ public class LoginTest extends TestBase {
         @Tag("SMOKE")
         @Tag("LOGIN")
         @Tag("POSITIVE")
+        @Severity(CRITICAL)
+        @Owner("EkaterinaI-tech")
+        @Link(name = "TASK-120", url = "https://jira.example.com/browse/TASK-120")
         @Test
+
         void successLoginTest() {
 
             String loggedInUserEmail = open(WEBSHOP_URL, WsWelcomePage.class)
@@ -56,10 +64,13 @@ public class LoginTest extends TestBase {
         }
     }
 
-    @ParameterizedTest(name = "Авторизация с невалидным email: {0}")
-    @CsvFileSource(resources = "/email.csv")
     @Tag("LOGIN")
     @Tag("NEGATIVE")
+    @Severity(CRITICAL)
+    @Owner("EkaterinaI-tech")
+    @Link(name = "TASK-120", url = "https://jira.example.com/browse/TASK-120")
+    @ParameterizedTest(name = "Авторизация с невалидным email: {0}")
+    @CsvFileSource(resources = "/email.csv")
 
     void invalidEmailLoginTest(String email) {
         open(WEBSHOP_URL_LOGIN_URL, WsLoginPage.class)
