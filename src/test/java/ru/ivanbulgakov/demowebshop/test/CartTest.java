@@ -38,6 +38,9 @@ public class CartTest extends TestBase {
     @Test
 
     void addItemToCartTest() {
+        System.getProperty("run");
+        System.getProperty("run", "local");
+
         WsProductPage productPage = open(WEBSHOP_URL, WsWelcomePage.class)
                 .hoverCategory(1)
                 .clickSubCategory("Desktops")
