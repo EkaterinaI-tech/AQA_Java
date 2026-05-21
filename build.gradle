@@ -34,6 +34,7 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    systemProperties(System.getProperties())
 }
 
 task smokeTest(type: Test) {
@@ -97,5 +98,9 @@ task bulgakovTest(type: Test) {
         includeTags 'BULGAKOV'
         testClassesDirs = sourceSets.test.output.classesDirs
         classpath = sourceSets.test.runtimeClasspath
+    }
+
+    tasks.withType(Test) {
+        systemProperties(System.getProperties())
     }
 }

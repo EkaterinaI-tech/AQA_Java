@@ -7,11 +7,15 @@ import org.aeonbits.owner.Config;
         "system:properties",
         "classpath:config/${run}.properties"
 })
+
 public interface WebDriverConfig extends Config {
+
 
     @DefaultValue("local")
     String run();
 
+    @Key("browser")
+    @DefaultValue("chrome")
     String browser();
 
     String browserVersion();
