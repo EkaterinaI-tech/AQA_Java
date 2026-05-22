@@ -19,8 +19,9 @@ public class RegistrationTest extends TestBase {
 
     @Owner("EkaterinaI-tech")
     @DisplayName("Успешная регистрация нового пользователя с использованием Faker")
+    @Tag("UI")
     @Tag("REGISTRATION")
-    @Tag("POSITIVE")
+    @Tag("positive")
     @Severity(CRITICAL)
     @Epic("Авторизация")
     @Feature("Регистрация")

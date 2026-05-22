@@ -37,6 +37,7 @@ test {
     systemProperties(System.getProperties())
 }
 
+/*
 task smokeTest(type: Test) {
     useJUnitPlatform {
         includeTags 'SMOKE'
@@ -103,4 +104,53 @@ task bulgakovTest(type: Test) {
     tasks.withType(Test) {
         systemProperties(System.getProperties())
     }
+}
+ */
+
+task uiTest(type: Test) {
+    useJUnitPlatform {
+        // Читаем параметр "tag", который мы передадим при запуске (например, -Dtag=positive)
+        def tag = System.getProperty("tag")
+
+        // Логика фильтрации тестов:
+        // Если тэг указан — запускаем тесты, где есть одновременно тег "UI" И наш указанный тэг
+        // Если тэг не указан — запускаем вообще все тесты с тегом "UI"
+        if (tag != null && !tag.isBlank()) {
+            includeTags("UI & ${tag}")
+        } else {
+            includeTags("UI")
+        }
+    }
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+
+    systemProperties(System.getProperties())
+}
+
+task apiTest(type: Test) {
+    useJUnitPlatform {
+        def tag = System.getProperty("tag")
+
+        if (tag != null && !tag.isBlank()) {
+            includeTags("API & ${tag}")
+        } else {
+            includeTags("API")
+        }
+    }
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+
+    systemProperties(System.getProperties())
+}
+
+task allTests(type: Test) {
+    useJUnitPlatform {
+        def tag = System.getProperty("tag")
+        if (tag != null && !tag.isBlank()) {
+            includeTags(tag) // Здесь НЕТ привязки к "API & UI"
+        }
+    }
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    systemProperties(System.getProperties())
 }

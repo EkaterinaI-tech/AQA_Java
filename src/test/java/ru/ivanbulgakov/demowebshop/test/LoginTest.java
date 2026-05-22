@@ -43,9 +43,10 @@ public class LoginTest extends TestBase {
         }
 
         @DisplayName("Проверка успешного входа залогиненного пользователя")
+        @Tag("UI")
         @Tag("SMOKE")
         @Tag("LOGIN")
-        @Tag("POSITIVE")
+        @Tag("positive")
         @Severity(CRITICAL)
         @Owner("EkaterinaI-tech")
         @Link(name = "TASK-120", url = "https://jira.example.com/browse/TASK-120")
@@ -64,8 +65,9 @@ public class LoginTest extends TestBase {
         }
     }
 
+    @Tag("UI")
     @Tag("LOGIN")
-    @Tag("NEGATIVE")
+    @Tag("negative")
     @Severity(CRITICAL)
     @Owner("EkaterinaI-tech")
     @Link(name = "TASK-120", url = "https://jira.example.com/browse/TASK-120")

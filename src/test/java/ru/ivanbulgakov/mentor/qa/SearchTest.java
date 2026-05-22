@@ -20,7 +20,8 @@ public class SearchTest extends TestBase {
     private static final String YANDEX_URL = "https://yandex.by/";
 
     @DisplayName("Проверить, что цена обучения - 47000 рублей")
-    @Tag("POSITIVE")
+    @Tag("UI")
+    @Tag("positive")
     @Tag("BULGAKOV")
     @Severity(NORMAL)
     @Owner("EkaterinaI-tech")
@@ -51,8 +52,9 @@ public class SearchTest extends TestBase {
     private static final String COURSE_NAME = "Тестирование ПО с нуля. Теория + Практика. Базовый уровень";
 
     @DisplayName("Проверить, что курс Тестирование ПО с нуля. Теория + Практика. Базовый уровень бесплатный")
+    @Tag("UI")
     @Tag("STEPIK")
-    @Tag("POSITIVE")
+    @Tag("positive")
     @Severity(NORMAL)
     @Owner("EkaterinaI-tech")
     @Link(name = "TASK-120", url = "https://jira.example.com/browse/TASK-120")

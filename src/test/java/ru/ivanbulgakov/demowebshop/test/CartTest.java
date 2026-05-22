@@ -29,9 +29,10 @@ public class CartTest extends TestBase {
     }
 
     @DisplayName("Проверка добавления товара в корзину в соответствии с количеством и ценой")
+    @Tag("UI")
     @Tag("SMOKE")
     @Tag("CART")
-    @Tag("POSITIVE")
+    @Tag("positive")
     @Severity(CRITICAL)
     @Owner("EkaterinaI-tech")
     @Link(name = "TASK-120", url = "https://jira.example.com/browse/TASK-120")
