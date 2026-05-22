@@ -15,8 +15,7 @@ public class JenkinsTest {
     }
 
     @Test
-    @Tag("UI")
-    @Tag("negative")
+    @Tags({@Tag("UI"), @Tag("negative")})
     @DisplayName("UI negative")
     void jenkinsTest2() {
         System.out.println("UI negative test");
@@ -30,8 +29,7 @@ public class JenkinsTest {
     }
 
     @Test
-    @Tag("API")
-    @Tag("negative")
+    @Tags({@Tag("API"), @Tag("negative")})
     @DisplayName("API negative")
     void jenkinsTest4() {
         System.out.println("API negative test");
