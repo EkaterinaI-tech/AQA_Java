@@ -1,4 +1,3 @@
-/*
 package ru.ivanbulgakov.demowebshop.test;
 
 import org.junit.jupiter.api.DisplayName;
@@ -7,20 +6,6 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 public class JenkinsTest {
-
-    @Test
-    @Tags({@Tag("UI"), @Tag("positive")})
-    @DisplayName("UI positive")
-    void jenkinsTest1() {
-        System.out.println("UI positive test");
-    }
-
-    @Test
-    @Tags({@Tag("UI"), @Tag("negative")})
-    @DisplayName("UI negative")
-    void jenkinsTest2() {
-        System.out.println("UI negative test");
-    }
 
     @Test
     @Tags({@Tag("API"), @Tag("positive")})
@@ -36,5 +21,3 @@ public class JenkinsTest {
         System.out.println("API negative test");
     }
 }
-
- */
