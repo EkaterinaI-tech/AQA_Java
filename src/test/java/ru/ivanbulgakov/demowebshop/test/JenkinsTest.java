@@ -1,3 +1,4 @@
+/*
 package ru.ivanbulgakov.demowebshop.test;
 
 import org.junit.jupiter.api.DisplayName;
@@ -35,3 +36,5 @@ public class JenkinsTest {
         System.out.println("API negative test");
     }
 }
+
+ */

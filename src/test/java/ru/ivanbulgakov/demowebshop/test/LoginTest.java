@@ -44,8 +44,8 @@ public class LoginTest extends TestBase {
 
         @DisplayName("Проверка успешного входа залогиненного пользователя")
         @Tag("UI")
-        @Tag("SMOKE")
-        @Tag("LOGIN")
+        @Tag("smoke")
+        @Tag("login")
         @Tag("positive")
         @Severity(CRITICAL)
         @Owner("EkaterinaI-tech")
@@ -66,7 +66,7 @@ public class LoginTest extends TestBase {
     }
 
     @Tag("UI")
-    @Tag("LOGIN")
+    @Tag("login")
     @Tag("negative")
     @Severity(CRITICAL)
     @Owner("EkaterinaI-tech")

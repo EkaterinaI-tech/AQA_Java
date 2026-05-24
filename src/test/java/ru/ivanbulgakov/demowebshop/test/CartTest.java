@@ -30,8 +30,8 @@ public class CartTest extends TestBase {
 
     @DisplayName("Проверка добавления товара в корзину в соответствии с количеством и ценой")
     @Tag("UI")
-    @Tag("SMOKE")
-    @Tag("CART")
+    @Tag("smoke")
+    @Tag("cart")
     @Tag("positive")
     @Severity(CRITICAL)
     @Owner("EkaterinaI-tech")
