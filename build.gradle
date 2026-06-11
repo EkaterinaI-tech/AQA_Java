@@ -35,7 +35,7 @@ dependencies {
     testImplementation 'io.rest-assured:rest-assured:6.0.0'
     testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
     testImplementation 'org.assertj:assertj-core:3.27.7'
-    implementation 'io.qameta.allure:allure-assertj:2.35.2'
+    testImplementation 'io.qameta.allure:allure-assertj:2.35.2'
 }
 
 test {
