@@ -1,36 +1,42 @@
-plugins {
-    id 'java'
-    id 'io.qameta.allure' version '3.0.1'
-}
-
-def allureVersion = "2.24.0"
-
-allure {
-    report {
-        version.set(allureVersion)
+    plugins {
+        id 'java'
+        id 'io.qameta.allure' version '3.0.1'
+        id 'io.freefair.lombok' version '9.5.0'
     }
-    adapter {
-        aspectjWeaver.set(true)
-        frameworks {
-            junit5 {
-                adapterVersion.set(allureVersion)
+
+    def allureVersion = "2.24.0"
+
+    allure {
+        report {
+            version.set(allureVersion)
+        }
+        adapter {
+            aspectjWeaver.set(true)
+            frameworks {
+                junit5 {
+                    adapterVersion.set(allureVersion)
+                }
             }
         }
     }
-}
 
-repositories {
-    mavenCentral()
-}
+    repositories {
+        mavenCentral()
+    }
 
-dependencies {
-    testImplementation "io.qameta.allure:allure-junit5:$allureVersion"
-    testImplementation "io.qameta.allure:allure-selenide:$allureVersion"
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
-    testImplementation 'com.codeborne:selenide:7.13.0'
-    testImplementation 'net.datafaker:datafaker:2.5.3'
-    testImplementation 'org.aeonbits.owner:owner:1.0.12'
-}
+    dependencies {
+        testImplementation "io.qameta.allure:allure-junit5:$allureVersion"
+        testImplementation "io.qameta.allure:allure-selenide:$allureVersion"
+        testImplementation "io.qameta.allure:allure-rest-assured:$allureVersion"
+        testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+        testImplementation 'com.codeborne:selenide:7.13.0'
+        testImplementation 'net.datafaker:datafaker:2.5.3'
+        testImplementation 'org.aeonbits.owner:owner:1.0.12'
+        testImplementation 'io.rest-assured:rest-assured:6.0.0'
+        testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+        testImplementation 'org.assertj:assertj-core:3.27.7'
+        testImplementation 'io.qameta.allure:allure-assertj:2.35.2'
+    }
 
 test {
     useJUnitPlatform()
