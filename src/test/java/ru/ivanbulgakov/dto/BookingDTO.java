@@ -1,15 +1,13 @@
 package ru.ivanbulgakov.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreateBookingDTO {
+@EqualsAndHashCode
+public class BookingDTO {
     private String firstname;
     private String lastname;
     private Integer totalprice;

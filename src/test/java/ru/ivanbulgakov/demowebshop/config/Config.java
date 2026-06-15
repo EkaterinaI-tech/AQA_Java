@@ -18,6 +18,7 @@ public class Config {
     public static WebDriverConfig getWebDriverConfig() {
         return config;
     }
+
     public static ChromeOptions getSelenoidChromeOptions() {
         ChromeOptions options = new ChromeOptions();
         options.setCapability("browserVersion", config.browserVersion());
