@@ -13,4 +13,6 @@ public interface BookingConfig extends Config {
     String username();
 
     String password();
+
+    String bookingUrl();
 }
